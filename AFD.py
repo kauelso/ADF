@@ -55,7 +55,6 @@ while 1:
             Eatual = F[index][2]  # proximo estado
             print(
                 f"Função de Transição: ({F[index][0]},{F[index][1]}) = {F[index][2]}")  # Passos
-            jsonData.steps.append([F[index][0],F[index][1],F[index][2]])
             i = i+1  # proximo elemento da cadeia de teste
             erro = 0  # Controle para o loop
             break

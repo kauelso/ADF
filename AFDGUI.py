@@ -1,13 +1,13 @@
 import tkinter as tk
 import json
 
-def to_tuple(F):
-    aux = [tuple(elem) for elem in F]
+def to_tuple(f):
+    aux = [tuple(elem) for elem in f]
     return aux
 
-def formatTransition(T):
+def format_transition(t):
     convert = lambda x: "δ=("+str(x[0])+","+str(x[1])+")="+str(x[2])
-    aux = [convert(elem) for elem in F]
+    aux = [convert(elem) for elem in t]
     return aux
 
 with open('ADFjson.json','r') as json_file:
@@ -30,11 +30,11 @@ entry.pack()
 Elabel.pack()
 Qlabel.pack()
     
-for elem in formatTransition(F):
+for elem in format_transition(F):
     Flabel = tk.Label(text= elem)
     Flabel.pack()
 
-Flabel = tk.Label(text=str(formatTransition(F)))
+Flabel = tk.Label(text=str(format_transition(F)))
 Q0label = tk.Label(text="q0={" + str(Q0) + "}")
 QFlabel = tk.Label(text="F={" + str(QF) + "}")
 

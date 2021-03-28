@@ -26,6 +26,15 @@ Q0 = ADF['Q0']  # Estado inicial
 QF = ADF['QF']  # Lista de estados finais
 C = input()  # Cadeia de teste
 
+class data:
+    steps = []
+    state = ""
+
+jsonData = data()
+
+for elem in formatTransition(F):
+    print(elem)
+
 #                      #
 #  INICIO DO AUTOMATO  #
 #                      #
@@ -46,6 +55,7 @@ while 1:
             Eatual = F[index][2]  # proximo estado
             print(
                 f"Função de Transição: ({F[index][0]},{F[index][1]}) = {F[index][2]}")  # Passos
+            jsonData.steps.append([F[index][0],F[index][1],F[index][2]])
             i = i+1  # proximo elemento da cadeia de teste
             erro = 0  # Controle para o loop
             break
@@ -60,10 +70,21 @@ while 1:
 
 if Eatual in QF:  # Verifica se a cadeia foi aceitada ou não
     print("ACEITA!")
+    data.state = "ACEITA!"
 else:
     print("REJEITADA!")
+    jsonData.state = "REJEITADA!"
     Efinal = str(QF)[1:-1]
     print(f"O estado final foi o '{Eatual}' e não o {Efinal}")
+
+jsonString = {
+    'steps':jsonData.steps,
+    'state':jsonData.state
+    }
+
+print(jsonData.__dict__)
+with open("ADFresults.json","w") as write_file:
+    json.dump(jsonString,write_file)
 
 # Saida:
 # a quíntupla fornecida na entrada e para cadeia testada

@@ -1,6 +1,7 @@
 import tkinter as tk
 import json
 import AFD
+import AFDresultsGUI
 
 def to_tuple(f):
     aux = [tuple(elem) for elem in f]
@@ -30,6 +31,7 @@ Qlabel = tk.Label(text="Q={" + str(Q) + "}")
 def StartAFD(E,Q,F,Q0,QF):
     C = entry.get()
     AFD.adf_start(E,Q,F,Q0,QF,C)
+    AFDresultsGUI.GUIstart(C)
 
 
 
@@ -46,10 +48,15 @@ Flabel = tk.Label(text=str(format_transition(F)))
 Q0label = tk.Label(text="q0={" + str(Q0) + "}")
 QFlabel = tk.Label(text="F={" + str(QF) + "}")
 
-submit = tk.Button(window, text ="Submit", command = lambda: StartAFD(E,Q,F,Q0,QF))
 Q0label.pack()
 QFlabel.pack()
+
+
+submit = tk.Button(window, text ="Submit", command = lambda: StartAFD(E,Q,F,Q0,QF))
+#show = tk.Button(window, text ="output", command = lambda: AFDresultsGUI.GUIstart(cadeia))
+
 submit.pack()
+#show.pack()
 
 # Enter into eventloop <- this will keep
 # running your application, until you exit

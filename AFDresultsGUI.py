@@ -10,14 +10,13 @@ def format_transition(t):
     aux = convert(t)
     return aux
 
-def executar(window,contador,steps,state):
-    print(len(steps))
+def executar(window,contador,steps,state,label,slabel):
     if contador[0] < len(steps):
-        stepslabel = tk.Label(window,text= f"Caracter: {steps[contador[0]][1]}  Estado atual: {steps[contador[0]][0]}")
-        stepslabel.pack()
+        label.config(text= f"Caracter: {steps[contador[0]][1]}  Estado atual: {steps[contador[0]][0]}")
+        label.update()
 
-        stepslabel = tk.Label(window,text=str(format_transition(steps[contador[0]])))
-        stepslabel.pack()
+        slabel.config(text = str(format_transition(steps[contador[0]])))
+        slabel.update()
     else:
         statelabel = tk.Label(window,text= state)
         statelabel.pack()
@@ -34,16 +33,16 @@ def GUIstart(cadeia):
     contador = [0]
 
     window = tk.Tk()
-    window.geometry("500x500")
-    frame = tk.Frame(window,width="500",height="500")
+    window.geometry("300x300")
+    frame = tk.Frame(window,width="300",height="300")
     frame.pack()
-    #swin = ScrolledWindow(frame, width=500, height=500)
-    #swin.pack()
     label = tk.Label(frame,text= f"Cadeia: {cadeia}")
     label.pack()
-    #label.grid(row=1, column=1)
-
-    avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(frame,contador,steps,state))
+    slabel = tk.Label(frame)
+    slabel.pack()
+    stlabel = tk.Label(frame)
+    stlabel.pack()
+    avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(frame,contador,steps,state,slabel,stlabel))
     avancar.pack()
 
     # Enter into eventloop <- this will keep

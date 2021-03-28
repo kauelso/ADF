@@ -7,7 +7,7 @@ def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
     else:
         return 1
 
-def toTuple(F):
+def to_tuple(F):
     aux = [tuple(elem) for elem in F]
     return aux
 
@@ -16,7 +16,7 @@ with open('ADFjson.json','r') as json_file:
 # Parte dos dados
 E = ADF['E']  # Simbolos de entrada
 Q = ADF['Q']  # Lista de estados
-F = toTuple(ADF['F'])  # Função de transição (Lista de tuplas) - [(Estado atual, simbolo, proximo estado),...]
+F = to_tuple(ADF['F'])  # Função de transição (Lista de tuplas) - [(Estado atual, simbolo, proximo estado),...]
 Q0 = ADF['Q0']  # Estado inicial
 QF = ADF['QF']  # Lista de estados finais
 C = "ababaa"  # Cadeia de teste

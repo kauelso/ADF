@@ -1,1 +1,1 @@
-{"steps": [["q0", "a", "q1"], ["q1", "a", "q3"]], "state": "ACEITA!"}
+{"steps": [["q0", "a", "q1"], ["q1", "a", "q3"]], "state": "REJEITADA, simbolo nao existe no alfabeto!"}

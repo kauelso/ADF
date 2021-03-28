@@ -7,6 +7,11 @@ def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
     else:
         return 1
 
+def formatTransition(T):
+    convert = lambda x: "δ=("+str(x[0])+","+str(x[1])+")="+str(x[2])
+    aux = [convert(elem) for elem in F]
+    return aux
+
 def to_tuple(F):
     aux = [tuple(elem) for elem in F]
     return aux
@@ -19,7 +24,7 @@ Q = ADF['Q']  # Lista de estados
 F = to_tuple(ADF['F'])  # Função de transição (Lista de tuplas) - [(Estado atual, simbolo, proximo estado),...]
 Q0 = ADF['Q0']  # Estado inicial
 QF = ADF['QF']  # Lista de estados finais
-C = "ababaa"  # Cadeia de teste
+C = input()  # Cadeia de teste
 
 #                      #
 #  INICIO DO AUTOMATO  #

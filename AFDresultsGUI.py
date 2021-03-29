@@ -10,8 +10,11 @@ def format_transition(t):
     aux = convert(t)
     return aux
 
-def executar(window,contador,steps,state,label,slabel):
+def executar(cadeia,window,contador,steps,state,label,slabel,Clabel):
     if contador[0] < len(steps):
+        Clabel.config(text= f"Cadeia lida: {cadeia[0:contador[0]+1]}")
+        Clabel.update()
+
         label.config(text= f"Caracter: {steps[contador[0]][1]}  Estado atual: {steps[contador[0]][0]}")
         label.update()
 
@@ -42,7 +45,9 @@ def GUIstart(cadeia):
     slabel.pack()
     stlabel = tk.Label(frame)
     stlabel.pack()
-    avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(frame,contador,steps,state,slabel,stlabel))
+    Clabel = tk.Label(frame)
+    Clabel.pack()
+    avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(cadeia,frame,contador,steps,state,slabel,stlabel,Clabel))
     avancar.pack()
 
     # Enter into eventloop <- this will keep

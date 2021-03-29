@@ -19,7 +19,8 @@ def adf_start(E,Q,F,Q0,QF,C):
 
     while 1:
         if pertence(E, C[i]) == 1:  # Verifica se a entrada atual pertence ao alfabeto
-            jsonData.state = "REJEITADA, simbolo nao existe no alfabeto!"
+            jsonData.steps.append([Eatual,C[i],"Simbolo fora do alfabeto"])
+            jsonData.state = "REJEITADA"
             invalido = True #Cadeia invalida
             break
 
@@ -34,7 +35,8 @@ def adf_start(E,Q,F,Q0,QF,C):
                 break
 
         if erro == 1:  # Verifica se existe nas funções a cadeia e o estado
-            jsonData.state = f"REJEITADA, estado atual {Eatual} ou cadeia de teste {C[i]} nao correspondida nas funcoes"
+            jsonData.steps.append([Eatual,C[i],"Nenhuma funcao de transicao correspondente"])
+            jsonData.state = f"REJEITADA"
             invalido = True #Cadeia innvalida
             break
 

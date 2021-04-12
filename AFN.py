@@ -1,4 +1,5 @@
 import sys
+import json
 
 
 # Parte dos dados
@@ -10,6 +11,10 @@ F = [("q1", "0", "q1"), ("q1", "1", "q1"),
 Q0 = 'q1'  # Estado inicial
 QF = ['q4']  # Lista de estados finais
 C = "11"  # Cadeia de teste
+
+class data: #Objeto que guarda a execução do automato
+    steps = []
+    state = ""
 
 
 #  INICIO DO AUTOMATO  #
@@ -25,8 +30,8 @@ def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
 
 
 def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
-
     # Verifica de comeco se toda a cadeia (C) pertence ao alfabeto da quintupla (E)
+    results = data()
     for index in range(0, len(C)):
         if pertence(E, C[index]) == 1:
             print("Erro, simbolo não existe no alfabeto!")
@@ -49,7 +54,7 @@ def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                     func = True
                     if afnd_rec(E, Q, F, F[index][2], QF, C[1:]) == 0:  # recursão
                         return 0
-                if F[index][1] == ' ':   # Encontra cadeia vazia na função
+                if F[index][1] == "":   # Encontra cadeia vazia na função
                     func = True
                     if afnd_rec(E, Q, F, F[index][2], QF, C) == 0:  # recursão
                         return 0
@@ -61,8 +66,12 @@ def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
 
     if result == 0:  # Printa se foi sucesso ou fracasso
         print("Sucesso")
+        results.state = "APROVADO!"
+        
+
     else:
         print("Fracasso")
+        results.state = "REJEITADO!"
     return
 
 

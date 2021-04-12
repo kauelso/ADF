@@ -30,6 +30,8 @@ Qlabel = tk.Label(text="Q={" + str(Q) + "}")
 
 def StartAFD(E,Q,F,Q0,QF):
     C = entry.get()
+    if C == '' :
+        print("Vazia")
     AFD.adf_start(E,Q,F,Q0,QF,C)
     AFDresultsGUI.GUIstart(C)
 

@@ -18,6 +18,10 @@ def adf_start(E,Q,F,Q0,QF,C):
     invalido = False
 
     while 1:
+        if C == '':
+            jsonData.steps.append([Eatual,'',Eatual])
+            break
+
         if pertence(E, C[i]) == 1:  # Verifica se a entrada atual pertence ao alfabeto
             jsonData.steps.append([Eatual,C[i],"Simbolo fora do alfabeto"])
             jsonData.state = "REJEITADA"

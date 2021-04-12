@@ -1,5 +1,5 @@
 import sys
-import json
+
 
 def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
     if t in E:
@@ -7,33 +7,15 @@ def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
     else:
         return 1
 
-def formatTransition(T):
-    convert = lambda x: "δ=("+str(x[0])+","+str(x[1])+")="+str(x[2])
-    aux = [convert(elem) for elem in F]
-    return aux
 
-def to_tuple(F):
-    aux = [tuple(elem) for elem in F]
-    return aux
-
-with open('ADFjson.json','r') as json_file:
-    ADF = json.load(json_file)
 # Parte dos dados
-E = ADF['E']  # Simbolos de entrada
-Q = ADF['Q']  # Lista de estados
-F = to_tuple(ADF['F'])  # Função de transição (Lista de tuplas) - [(Estado atual, simbolo, proximo estado),...]
-Q0 = ADF['Q0']  # Estado inicial
-QF = ADF['QF']  # Lista de estados finais
-C = input()  # Cadeia de teste
-
-class data:
-    steps = []
-    state = ""
-
-jsonData = data()
-
-for elem in formatTransition(F):
-    print(elem)
+E = 'ab'  # Simbolos de entrada
+Q = ['q0', 'q1', 'q2', 'q3']  # Lista de estados
+F = [("q0", "a", "q1"), ("q0", "b", "q2"), ("q1", "a", "q3"), ("q1", "b", "q2"), ("q2", "a", "q1"), ("q2", "b", "q3"),
+     ("q3", "a", "q3"), ("q3", "b", "q3")]  # Função de transição (Lista de tuplas) - [(Estado atual, simbolo, proximo estado),...]
+Q0 = 'q0'  # Estado inicial
+QF = ['q3']  # Lista de estados finais
+C = "ababaa"  # Cadeia de teste
 
 #                      #
 #  INICIO DO AUTOMATO  #
@@ -69,21 +51,10 @@ while 1:
 
 if Eatual in QF:  # Verifica se a cadeia foi aceitada ou não
     print("ACEITA!")
-    data.state = "ACEITA!"
 else:
     print("REJEITADA!")
-    jsonData.state = "REJEITADA!"
     Efinal = str(QF)[1:-1]
     print(f"O estado final foi o '{Eatual}' e não o {Efinal}")
-
-jsonString = {
-    'steps':jsonData.steps,
-    'state':jsonData.state
-    }
-
-print(jsonData.__dict__)
-with open("ADFresults.json","w") as write_file:
-    json.dump(jsonString,write_file)
 
 # Saida:
 # a quíntupla fornecida na entrada e para cadeia testada

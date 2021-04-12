@@ -54,7 +54,7 @@ def adf_start(E,Q,F,Q0,QF,C):
         'state':jsonData.state
         }
 
-    with open("ADFresults.json","w") as write_file:
+    with open("AFDresults.json","w") as write_file:
         json.dump(jsonString,write_file)
 
 

@@ -12,7 +12,7 @@ def format_transition(t):
     aux = [convert(elem) for elem in t]
     return aux
 
-with open('ADFjson.json','r') as json_file:
+with open('AFDjson.json','r') as json_file:
     AFDjson = json.load(json_file)
 
 E = AFDjson['E']  # Simbolos de entrada
@@ -40,14 +40,27 @@ entry.pack()
 Elabel.pack()
 Qlabel.pack()
     
-for elem in format_transition(F):
-    Flabel = tk.Label(text= elem)
-    Flabel.pack()
+# for elem in format_transition(F):
+#     tamanho = len(F)
+#     for 
+#     Flabel = tk.Label(text= elem)
+#     Flabel.pack()
+indice = 0
+scrollbar = tk.Scrollbar(window)
+scrollbar.pack( side = "right", fill = "y" )
+transicoes = format_transition(F)
+mylist = tk.Listbox(window, yscrollcommand = scrollbar.set )
+for elem in transicoes:
+     mylist.insert(indice,elem)
+     indice = indice + 1
 
-Flabel = tk.Label(text=str(format_transition(F)))
+mylist.pack( side = "bottom", fill = "both" )
+scrollbar.config( command = mylist.yview )
+
+#Flabel = tk.Label(text=str(format_transition(F)))
 Q0label = tk.Label(text="q0={" + str(Q0) + "}")
 QFlabel = tk.Label(text="F={" + str(QF) + "}")
-
+#Flabel.pack()
 Q0label.pack()
 QFlabel.pack()
 

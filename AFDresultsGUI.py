@@ -28,7 +28,7 @@ def executar(cadeia,window,contador,steps,state,label,slabel,Clabel):
 
 def GUIstart(cadeia):
 
-    with open('ADFresults.json','r') as json_file:
+    with open('AFDresults.json','r') as json_file:
         ADF = json.load(json_file)
     steps = to_tuple(ADF['steps'])  # Lista de tuplas executadas - [(Estado atual, simbolo, proximo estado),...]
     state = ADF['state']
@@ -49,6 +49,7 @@ def GUIstart(cadeia):
     Clabel.pack()
     avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(cadeia,frame,contador,steps,state,slabel,stlabel,Clabel))
     avancar.pack()
+
 
     # Enter into eventloop <- this will keep
     # running your application, until you exit

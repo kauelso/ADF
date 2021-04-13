@@ -12,7 +12,7 @@ def format_transition(t):
     aux = [convert(elem) for elem in t]
     return aux
 
-with open('AFDjson.json','r') as json_file:
+with open('AFD/AFDjson.json','r') as json_file:
     AFDjson = json.load(json_file)
 
 E = AFDjson['E']  # Simbolos de entrada

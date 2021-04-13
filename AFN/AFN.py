@@ -30,6 +30,7 @@ def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
 
 
 def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
+    results = data()
 
     def afnd_rec(E, Q, F, Q0, QF, C):  # Função para a recursão
 

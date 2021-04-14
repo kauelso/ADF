@@ -31,6 +31,8 @@ def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
 
 def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
     results = data()
+    results.steps = []
+    results.state = ""
 
     def afnd_rec(E, Q, F, Q0, QF, C):  # Função para a recursão
 
@@ -45,12 +47,13 @@ def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                         for est in range(0, len(F[var][2])):
                             if afnd_rec(E, Q, F, F[var][2][est], QF, C) == 0:  # recursão
                                 return 0
-                return 1
+                    return 1
 
         func = False
 
         if pertence(E, C[0]) == 1:   # Verifica se existe no alfabeto
             print("Erro, simbolo não existe no alfabeto!")
+            results.steps.append([Q0,C[0],""])
             return 1
 
         for index in range(0, len(F)):   # Busca função de transição
@@ -59,7 +62,7 @@ def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                     func = True
                     for est in range(0, len(F[index][2])):
                         if afnd_rec(E, Q, F, F[index][2][est], QF, C[1:]) == 0:  # recursão
-                            results.steps.append([F[index][0],F[index][1],F[index][2][est]])
+                            results.steps.append([F[index][0],F[index][1],F[index][2]])
                             return 0
                 if F[index][1] == '':   # Encontra cadeia vazia na função
                     func = True
@@ -70,7 +73,7 @@ def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
         if func == False:
             return 1
 
-    result = -1
+    
 
     # Verifica de começo se a cadeia é vazia, já resolvendo caso comecar o automato com uma cadeia vazia
     if len(C) == 0:
@@ -80,16 +83,17 @@ def afnd_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
 
     else:
         result = afnd_rec(E, Q, F, Q0, QF, C)
-
-    if result == 0:  # Printa se foi sucesso ou fracasso
-        print("Sucesso")
-        results.state = "APROVADO!"
+        if result == 0:  # Printa se foi sucesso ou fracasso
+            print("Sucesso")
+            results.state = "APROVADO!"
         
 
-    else:
-        print("Fracasso")
-        results.state = "REJEITADO!"
-        
+        else:
+            print("Fracasso")
+            results.state = "REJEITADO!"
+
+    
+
     results.steps.reverse()
     jsonString = { # Formatacao do JSON de resultados
         'steps':results.steps,

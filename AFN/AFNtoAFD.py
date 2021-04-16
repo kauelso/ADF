@@ -13,8 +13,29 @@ def to_tuple(f):
 def to_state(f):
     aux = []
     for elem in f:
-        aux.append([elem[0],elem[1],str(elem[2])])
+        aux.append([str(elem[0]),elem[1],str(elem[2])])
     return aux
+
+def fetch_funcs(f,q,e):
+    for elem in f:
+        if q == elem[0] and e == elem[1]:
+            return elem[2]
+    return []
+
+def qn_to_fd(f,q,e):
+    funcs = []
+    for s in e:
+        simbol_list = []
+        for elem in list(powerset(q))[1:]:
+            elem_list = []
+            for i in elem:
+                aux = fetch_funcs(f,i,s)
+                for j in aux:
+                        elem_list.append(j)
+            if elem_list != []:
+                funcs.append([elem,s,elem_list])
+
+    return funcs
 
 def states_to_string(q):
     aux = []
@@ -26,7 +47,7 @@ def fn_to_fd(q,qf):
     aux = []
     for elem in q:
         for item in elem:
-            if item in QF:
+            if item in qf:
                 aux.append(elem)
     return aux
 
@@ -40,14 +61,20 @@ F = AFNjson['F'] #As transições usam a lista de estado como estado
 QF = AFNjson['QF']  # Powerset de QF tais que a interseção não seja nula entre os automatos
 
 def convert_to_AFD(E,Q,F,Q0,QF):
-    QF = fn_to_fd(Q,QF)
-    print(QF)
-    Q = states_to_string(list(powerset(Q))[1:])
-    print(Q)
+    F = to_state(qn_to_fd(F,Q,E))
+    QF = states_to_string(fn_to_fd(list(powerset(Q)),QF))
+    Q = states_to_string(list(powerset(Q)))
     Q0 = str([Q0])
-    print(Q0)
-    F = to_state(F)
-    print(F)
 
+    jsondata = {
+        'E': E,
+        'Q': Q,
+        'Q0': Q0,
+        'F': F,
+        'QF': QF
+    }
+
+    with open('AFN/AFNConverted.json','w') as write_file:
+        json.dump(jsondata,write_file)
 
 convert_to_AFD(E,Q,F,Q0,QF)

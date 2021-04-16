@@ -1,6 +1,5 @@
 import tkinter as tk
 import json
-import AFNtoAFDGUI
 
 def to_tuple(f):
     aux = [tuple(elem) for elem in f] 

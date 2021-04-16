@@ -1,4 +1,7 @@
 import json
+import sys
+import AFNtoAFDGUI
+
 
 def powerset(s):
     x = len(s)
@@ -25,25 +28,17 @@ def states_to_string(q):
 def fn_to_fd(q,qf):
     aux = []
     for elem in q:
-        print(elem)
         for item in elem:
-            if str(item) == 'q0':
+            if item in qf:
                 aux.append(elem)
+    return aux
 
-with open('AFN/AFNjson.json','r') as json_file:
-    AFNjson = json.load(json_file)
-
-E = AFNjson['E'] #Correto
-Q = list(powerset(AFNjson['Q']))[1:] #Será o powerset
-Q0 = AFNjson['Q0'] #Correto
-F = to_tuple(AFNjson['F']) #As transições usam a lista de estado como estado
-QF = AFNjson['QF']  # Powerset de QF tais que a interseção não seja nula entre os automatos
-
-def convert_to_AFD(E,Q,F,Q0,QF,C):
+def convert_to_AFD(E,Q,F,Q0,QF):
+    QF = fn_to_fd(Q,QF)
     Q = states_to_string(list(powerset(Q))[1:])
     Q0 = str([Q0])
     F = to_state(to_tuple(F))
+    AFNtoAFDGUI.StartAFDtoAFNGUI(E,Q,F,Q0,QF)
 
-print(Q)
-# print(type(QF[0]))
-print(fn_to_fd(Q,QF))
+
+

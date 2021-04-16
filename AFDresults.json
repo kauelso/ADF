@@ -1,1 +1,1 @@
-{"steps": [["q0", "a", "q0"], ["q0", "b", "q0"], ["q0", "a", "q0"], ["q0", "b", "q0"]], "state": "REJEITADA!"}
+{"steps": [["['q0']", "1", "Nenhuma funcao de transicao correspondente"]], "state": "REJEITADA"}

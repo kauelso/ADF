@@ -1,7 +1,7 @@
 import tkinter as tk
 import json
 import AFN
-#import AFNresultsGUI
+import AFNresultsGUI
 
 def to_tuple(f):
     aux = [tuple(elem) for elem in f]
@@ -32,7 +32,7 @@ Qlabel = tk.Label(text="Q={" + str(Q) + "}")
 def StartAFN(E,Q,F,Q0,QF):
     C = entry.get()
     AFN.afnd_start(E,Q,F,Q0,QF,C)
-    #AFDresultsGUI.GUIstart(C)
+    AFNresultsGUI.GUIstart(C)
 
 
 label.pack()

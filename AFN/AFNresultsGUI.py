@@ -11,19 +11,33 @@ def format_transition(t):
     return aux
 
 
-def executar(cadeia,window,contador,steps,state,label,slabel,Clabel):
-    if contador[0] < len(steps):
-        Clabel.config(text= f"Cadeia lida: {cadeia[0:contador[0]+1]}")
-        Clabel.update()
+def executar(cadeia,window,contador,steps,state,label,slabel,Clabel,fsteps):
+    if state == "APROVADO!":
+        if contador[0] < len(steps):
+            Clabel.config(text= f"Cadeia lida: {cadeia[0:contador[0]+1]}")
+            Clabel.update()
 
-        label.config(text= f"Caracter: {steps[contador[0]][1]}  Estado atual: {steps[contador[0]][0]}")
-        label.update()
+            label.config(text= f"Caracter: {steps[contador[0]][1]}  Estado atual: {steps[contador[0]][0]}")
+            label.update()
 
-        slabel.config(text = str(format_transition(steps[contador[0]])))
-        slabel.update()
+            slabel.config(text = str(format_transition(steps[contador[0]])))
+            slabel.update()
+        else:
+            statelabel = tk.Label(window,text= state)
+            statelabel.pack()
     else:
-        statelabel = tk.Label(window,text= state)
-        statelabel.pack()
+        if contador[0] < len(fsteps):
+            Clabel.config(text= f"Cadeia lida: {cadeia[0:contador[0]+1]}")
+            Clabel.update()
+
+            label.config(text= f"Caracter: {fsteps[contador[0]][1]}  Estado atual: {fsteps[contador[0]][0]}")
+            label.update()
+
+            slabel.config(text = str(format_transition(fsteps[contador[0]])))
+            slabel.update()
+        else:
+            statelabel = tk.Label(window,text= state)
+            statelabel.pack()
 
     contador[0] = contador[0] + 1
 
@@ -33,6 +47,7 @@ def GUIstart(cadeia):
         ADF = json.load(json_file)
     steps = to_tuple(ADF['steps'])  # Lista de tuplas executadas - [(Estado atual, simbolo, proximo estado),...]
     state = ADF['state']
+    fsteps = to_tuple(ADF['fsteps'])
 
     contador = [0]
 
@@ -48,7 +63,7 @@ def GUIstart(cadeia):
     stlabel.pack()
     Clabel = tk.Label(frame)
     Clabel.pack()
-    avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(cadeia,frame,contador,steps,state,slabel,stlabel,Clabel))
+    avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(cadeia,frame,contador,steps,state,slabel,stlabel,Clabel,fsteps))
     avancar.pack()
 
 

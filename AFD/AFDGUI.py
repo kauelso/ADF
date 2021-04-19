@@ -26,7 +26,10 @@ window = tk.Tk()
 label = tk.Label(text="Cadeia")
 entry = tk.Entry()
 Elabel = tk.Label(text="Σ={" + E + "}")
-Qlabel = tk.Label(text="Q={" + str(Q) + "}")
+T = tk.Text(window, height = 5)
+#Qlabel = tk.Label(window,text="Q={" + str(Q) + "}")
+Fact = "Q={" + str(Q) + "}"
+T.insert(tk.END,Fact)
 
 def StartAFD(E,Q,F,Q0,QF):
     C = entry.get()
@@ -38,7 +41,8 @@ def StartAFD(E,Q,F,Q0,QF):
 label.pack()
 entry.pack()
 Elabel.pack()
-Qlabel.pack()
+T.pack()
+#Qlabel.pack()
     
 # for elem in format_transition(F):
 #     tamanho = len(F)

@@ -29,7 +29,7 @@ def executar(cadeia,window,contador,steps,state,label,slabel,Clabel):
 
 def GUIstart(cadeia):
 
-    with open('AFDresults.json','r') as json_file:
+    with open('AFN/AFNresults.json','r') as json_file:
         ADF = json.load(json_file)
     steps = to_tuple(ADF['steps'])  # Lista de tuplas executadas - [(Estado atual, simbolo, proximo estado),...]
     state = ADF['state']

@@ -1,3 +1,21 @@
+def normalizeExp(str1):
+    out = ""
+    for elem in str1:
+        if elem in opcodes or elem == '(' or elem == ')':
+            out = out + elem
+        elif out != "":
+            aux = out[-1]
+            if aux in opcodes or aux == '(' or aux == ')':
+               out = out + elem
+            else:
+                out = out + '.'
+                out = out + elem
+        else:
+            out = out+elem
+    return out
+
+
+
 def resolveOp(stack,elem,opcodes,popped):
     if popped == '(' or ')': #se o operador for um parenteses
         stack.append(popped) #devolve o parenteses na stack
@@ -23,7 +41,8 @@ ex = "0.1*+1" #expressao de entrada
 
 opcodes = ['+','.','*'] #operadores em ordem (menos relevante para o mais relevante)
 
-exlist = ex[::-1] #inverter a string de entrada
+exlist = normalizeExp(ex[::-1]) #inverter a string de entrada
+print(exlist)
 
 output = [] #output stack
 stack = [] #op stack

@@ -37,12 +37,11 @@ def resolveLessOp(stack,elem,opcodes,output):
     if not stack:
         stack.append(elem)
 
-ex = "0.1*+1" #expressao de entrada
+ex = "(0.1)*+1" #expressao de entrada
 
 opcodes = ['+','.','*'] #operadores em ordem (menos relevante para o mais relevante)
 
 exlist = normalizeExp(ex[::-1]) #inverter a string de entrada
-print(exlist)
 
 output = [] #output stack
 stack = [] #op stack

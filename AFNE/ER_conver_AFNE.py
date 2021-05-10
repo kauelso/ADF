@@ -124,8 +124,5 @@ def convert(cad):
             pilha.append(E)
 
     # A ordem é [QF, Q0, F, Q, E], para extrair mais facil é so dar pilha.pop para os json usando a ordem inversa :)
-    print(pilha)
-
-
-cadeia = ''  # Teste
-convert(cadeia)
+    pilha.reverse()
+    return(pilha)

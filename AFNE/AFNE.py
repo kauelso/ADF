@@ -1,16 +1,6 @@
 import sys
-
-
-# Parte dos dados
-E = '01'  # Simbolos de entrada
-Q = ['q0', 'q1', 'q2']  # Lista de estados
-# Função de transição (Lista de tuplas) - [(Estado atual, simbolo, proximo estado),...]  Funçao ε deve ser tratada como " " ex: ("q2", " ", "q3")
-F = [("q0", "0", ["q0"]), ("q0", "1", ["q0", "q1"]), ("q1", "0", ["q2"]),
-     ("q1", "", ["q2"]), ("q2", "1", ["q3"]), ("q2", "", ["q3"]), ("q3", "0", ["q3"]), ("q3", "1", ["q3"])]
-Q0 = 'q0'  # Estado inicial
-QF = ['q3']  # Lista de estados finais
-C = "1"  # Cadeia de teste
-
+import ER_conver_AFNE as ER_AFNE
+import infix_to_prefix as intp
 
 #  INICIO DO AUTOMATO  #
 #      FINITO NÃO      #
@@ -72,6 +62,14 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
         print("Fracasso")
     return
 
+print("Expressao que sera convertida: ")
 
+exp = input()
+exp = intp.convert(exp)
+conv = ER_AFNE.convert("+.0*11")
 # MAIN
-afne_start(E, Q, F, Q0, QF, C)
+print("Cadeia para ser calculada")
+
+C = input()
+
+afne_start(conv[0],conv[1],conv[2],conv[3],conv[4],C)

@@ -1,4 +1,4 @@
-def normalizeExp(str1):
+def normalizeExp(str1, opcodes):
     out = ""
     for elem in str1:
         if elem in opcodes or elem == '(' or elem == ')':
@@ -37,46 +37,43 @@ def resolveLessOp(stack,elem,opcodes,output):
     if not stack:
         stack.append(elem)
 
-ex = "(0.1)*+1" #expressao de entrada
+def convert(ex):
+    opcodes = ['+','.','*'] #operadores em ordem (menos relevante para o mais relevante)
 
-opcodes = ['+','.','*'] #operadores em ordem (menos relevante para o mais relevante)
+    exlist = normalizeExp(ex[::-1],opcodes) #inverter a string de entrada
 
-exlist = normalizeExp(ex[::-1]) #inverter a string de entrada
+    output = [] #output stack
+    stack = [] #op stack
 
-output = [] #output stack
-stack = [] #op stack
-
-for elem in exlist: #Para cada elemento da entrada
-    if elem in opcodes: #se um elemento for um operador
-        if stack: #caso tenha algo na pilha
-            popped = stack.pop() #da pop no elemento que esta na pilha
-            if popped in opcodes and opcodes.index(elem) < opcodes.index(popped): #se o elemento retirado for um operador e tiver maior prioridade 
-                output.append(popped) #coloca o elemento retirado no output no output
-                resolveLessOp(stack,elem,opcodes,popped) #trata o elemento que ira ser colocado
+    for elem in exlist: #Para cada elemento da entrada
+        if elem in opcodes: #se um elemento for um operador
+            if stack: #caso tenha algo na pilha
+                popped = stack.pop() #da pop no elemento que esta na pilha
+                if popped in opcodes and opcodes.index(elem) < opcodes.index(popped): #se o elemento retirado for um operador e tiver maior prioridade 
+                    output.append(popped) #coloca o elemento retirado no output no output
+                    resolveLessOp(stack,elem,opcodes,popped) #trata o elemento que ira ser colocado
+                else:
+                    resolveOp(stack,elem,opcodes,popped) #Se o operador tiver maior precedencia ou o top da pilha nao for um operador ele é tratado nessa func
             else:
-                resolveOp(stack,elem,opcodes,popped) #Se o operador tiver maior precedencia ou o top da pilha nao for um operador ele é tratado nessa func
-        else:
-            stack.append(elem) #se nao tiver nada na pilha, empilha o operador
-    elif elem == ')': #se  for um parenteses fechado
-        stack.append(elem) #empilha o parenteses
-    elif elem == '(':#se for um parenteses aberto
-        popped = stack.pop() #remove os elementos e coloca no output ate achar o parenteses fechado 
-        output.append(popped)
-        while popped != ')':
-            popped = stack.pop()
+                stack.append(elem) #se nao tiver nada na pilha, empilha o operador
+        elif elem == ')': #se  for um parenteses fechado
+            stack.append(elem) #empilha o parenteses
+        elif elem == '(':#se for um parenteses aberto
+            popped = stack.pop() #remove os elementos e coloca no output ate achar o parenteses fechado 
             output.append(popped)
-        output.pop()
-    else: #caso nao seja nenhum outro caso ele sera um operador e deve ir para o output
+            while popped != ')':
+                popped = stack.pop()
+                output.append(popped)
+            output.pop()
+        else: #caso nao seja nenhum outro caso ele sera um operador e deve ir para o output
+            output.append(elem)
+
+    while stack: #por fim, desempilha toda a pilha
+        elem = stack.pop()
         output.append(elem)
 
-while stack: #por fim, desempilha toda a pilha
-    elem = stack.pop()
-    output.append(elem)
-
-output.reverse() #inverte o array de output
-str1 = "".join(str(x) for x in output) #transforma o array em uma string
-print(str1)
-    
-
+    output.reverse() #inverte o array de output
+    str1 = "".join(str(x) for x in output) #transforma o array em uma string
+    return str1   
 
 

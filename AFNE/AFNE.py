@@ -19,6 +19,7 @@ def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
 
 def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
     trace = []
+    success_trace = []
 
     def afne_rec(E, Q, F, Q0, QF, C):  # Função para a recursão
 
@@ -49,7 +50,7 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                         print(f"Lendo: "+Q0+" em "+C[0])
                         print(f"Possiveis: {F[index][2]}")
                         print(f"indo para: " + F[index][2][est])
-                        trace.append([f"Lendo: "+Q0+" em "+C[0],f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
+                        trace.append([C[1:],f"Lendo: "+Q0+" em "+C[0],f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
                         if afne_rec(E, Q, F, F[index][2][est], QF, C[1:]) == 0:  # recursão
                             return 0
                 if F[index][1] == '':   # Encontra cadeia vazia na função
@@ -58,7 +59,7 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                         print("Lendo: "+Q0 + " em transicao vazia")
                         print(f"Possiveis: {F[index][2]}")
                         print(f"Indo para: " + F[index][2][est])
-                        trace.append([f"Lendo: "+Q0+" em transicao vazia",f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
+                        trace.append([C,f"Lendo: "+Q0+" em transicao vazia",f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
                         if afne_rec(E, Q, F, F[index][2][est], QF, C) == 0:  # recursão
                             return 0
 

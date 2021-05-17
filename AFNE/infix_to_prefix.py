@@ -51,7 +51,7 @@ def convert(ex):
                 popped = stack.pop() #da pop no elemento que esta na pilha
                 if popped in opcodes and opcodes.index(elem) < opcodes.index(popped): #se o elemento retirado for um operador e tiver maior prioridade 
                     output.append(popped) #coloca o elemento retirado no output no output
-                    resolveLessOp(stack,elem,opcodes,popped) #trata o elemento que ira ser colocado
+                    resolveLessOp(stack,elem,opcodes,output) #trata o elemento que ira ser colocado
                 else:
                     resolveOp(stack,elem,opcodes,popped) #Se o operador tiver maior precedencia ou o top da pilha nao for um operador ele é tratado nessa func
             else:
@@ -76,4 +76,6 @@ def convert(ex):
     str1 = "".join(str(x) for x in output) #transforma o array em uma string
     return str1   
 
+# C = input()
+# convert(C)
 

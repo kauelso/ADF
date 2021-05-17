@@ -1,6 +1,7 @@
 import sys
 import ER_conver_AFNE as ER_AFNE
 import infix_to_prefix as intp
+import json
 
 #  INICIO DO AUTOMATO  #
 #      FINITO NÃO      #
@@ -16,6 +17,7 @@ def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
 
 
 def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
+    trace = []
 
     def afne_rec(E, Q, F, Q0, QF, C):  # Função para a recursão
 
@@ -61,15 +63,3 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
     else:
         print("Fracasso")
     return
-
-print("Expressao que sera convertida: ")
-
-exp = input()
-exp = intp.convert(exp)
-conv = ER_AFNE.convert("+.0*11")
-# MAIN
-print("Cadeia para ser calculada")
-
-C = input()
-
-afne_start(conv[0],conv[1],conv[2],conv[3],conv[4],C)

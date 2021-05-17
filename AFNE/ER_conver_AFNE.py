@@ -1,3 +1,5 @@
+import json
+
 def rem_rep(lista):
     l = []
     for i in lista:
@@ -125,4 +127,14 @@ def convert(cad):
 
     # A ordem é [QF, Q0, F, Q, E], para extrair mais facil é so dar pilha.pop para os json usando a ordem inversa :)
     pilha.reverse()
-    return(pilha)
+
+    jsondata = {
+        'E': pilha[0],
+        'Q': pilha[1],
+        'Q0': pilha[3],
+        'F': pilha[2],
+        'QF': pilha[4]
+    }
+
+    with open('AFNE/AFNE_automata.json','w') as write_file:
+        json.dump(jsondata,write_file)

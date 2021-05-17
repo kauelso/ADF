@@ -9,6 +9,7 @@ import json
 #     COM CADEIAS      #
 #        VAZIAS        #
 
+
 def pertence(E, t):  # Verifica se o teste pertence aos simbolos de entrada
     if t in E:
         return 0
@@ -45,11 +46,17 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                 if F[index][1] == C[0]:  # Encontra elemento da cadeia na função
                     func = True
                     for est in range(0, len(F[index][2])):
+                        print(f"Lendo: "+Q0+" em "+C[0])
+                        print(f"Possiveis: {F[index][2]}")
+                        print(f"indo para: " + F[index][2][est])
                         if afne_rec(E, Q, F, F[index][2][est], QF, C[1:]) == 0:  # recursão
                             return 0
                 if F[index][1] == '':   # Encontra cadeia vazia na função
                     func = True
                     for est in range(0, len(F[index][2])):
+                        print("Lendo: "+Q0 + " em cadeia vazia")
+                        print(f"Possiveis: {F[index][2]}")
+                        print(f"Indo para: " + F[index][2][est])
                         if afne_rec(E, Q, F, F[index][2][est], QF, C) == 0:  # recursão
                             return 0
 

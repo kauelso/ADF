@@ -49,14 +49,16 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                         print(f"Lendo: "+Q0+" em "+C[0])
                         print(f"Possiveis: {F[index][2]}")
                         print(f"indo para: " + F[index][2][est])
+                        trace.append([f"Lendo: "+Q0+" em "+C[0],f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
                         if afne_rec(E, Q, F, F[index][2][est], QF, C[1:]) == 0:  # recursão
                             return 0
                 if F[index][1] == '':   # Encontra cadeia vazia na função
                     func = True
                     for est in range(0, len(F[index][2])):
-                        print("Lendo: "+Q0 + " em cadeia vazia")
+                        print("Lendo: "+Q0 + " em transicao vazia")
                         print(f"Possiveis: {F[index][2]}")
                         print(f"Indo para: " + F[index][2][est])
+                        trace.append([f"Lendo: "+Q0+" em transicao vazia",f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
                         if afne_rec(E, Q, F, F[index][2][est], QF, C) == 0:  # recursão
                             return 0
 
@@ -64,9 +66,18 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
             return 1
 
     result = afne_rec(E, Q, F, Q0, QF, C)
-
+    result_str = ""
     if result == 0:  # Printa se foi sucesso ou fracasso
         print("Sucesso")
+        result_str = "Sucesso"
     else:
         print("Fracasso")
+        result_str = "Fracasso"
+    jsondata = {
+        'steps':trace,
+        'result':result_str
+    }
+
+    with open('AFNE/AFNE_automata_result.json','w') as write_file:
+        json.dump(jsondata,write_file)
     return

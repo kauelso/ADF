@@ -9,7 +9,7 @@ def to_tuple(f):
 
 print("Expressao que sera convertida: ")
 
-exp = "((10)+(005)+2+123)"
+exp = input()
 exp = intp.convert(exp)
 print(exp)
 ER_AFNE.convert(exp)

@@ -26,6 +26,7 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
         # Verifica de começo se a cadeia é vazia, já resolvendo caso comecar o automato com uma cadeia vazia
         if len(C) == 0:
             if Q0 in QF:
+                trace.append([C,"Fim da recursao","Possiveis: []", "Cadeia Aceita"])
                 return 0
             else:
                 # Tratamento quando a C termina e ainda existe cadeia vazia possiveis na função
@@ -34,6 +35,7 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                         for est in range(0, len(F[var][2])):
                             if afne_rec(E, Q, F, F[var][2][est], QF, C) == 0:  # recursão
                                 return 0
+                trace.append([C,"Fim da recursao","Possiveis: []", "Cadeia rejeitada, indo para outro caminho"])
                 return 1
 
         func = False

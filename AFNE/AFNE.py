@@ -26,7 +26,7 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
         # Verifica de começo se a cadeia é vazia, já resolvendo caso comecar o automato com uma cadeia vazia
         if len(C) == 0:
             if Q0 in QF:
-                trace.append([C,"Fim da recursao","Possiveis: []", "Cadeia Aceita"])
+                trace.append([C+" ","Fim da recursao","Possiveis: []", "Cadeia Aceita"])
                 return 0
             else:
                 # Tratamento quando a C termina e ainda existe cadeia vazia possiveis na função
@@ -35,7 +35,7 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                         for est in range(0, len(F[var][2])):
                             if afne_rec(E, Q, F, F[var][2][est], QF, C) == 0:  # recursão
                                 return 0
-                trace.append([C,"Fim da recursao","Possiveis: []", "Cadeia rejeitada, indo para outro caminho"])
+                trace.append([C+" ","Fim da recursao","Possiveis: []", "Cadeia rejeitada, indo para outro caminho"])
                 return 1
 
         func = False
@@ -52,7 +52,7 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                         print(f"Lendo: "+Q0+" em "+C[0])
                         print(f"Possiveis: {F[index][2]}")
                         print(f"indo para: " + F[index][2][est])
-                        trace.append([C[1:],f"Lendo: "+Q0+" em "+C[0],f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
+                        trace.append([C[1:]+" ",f"Lendo: "+Q0+" em "+C[0],f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
                         if afne_rec(E, Q, F, F[index][2][est], QF, C[1:]) == 0:  # recursão
                             return 0
                 if F[index][1] == '':   # Encontra cadeia vazia na função
@@ -61,7 +61,7 @@ def afne_start(E, Q, F, Q0, QF, C):  # Função do automato inteiro
                         print("Lendo: "+Q0 + " em transicao vazia")
                         print(f"Possiveis: {F[index][2]}")
                         print(f"Indo para: " + F[index][2][est])
-                        trace.append([C,f"Lendo: "+Q0+" em transicao vazia",f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
+                        trace.append([C+" ",f"Lendo: "+Q0+" em transicao vazia",f"Possiveis: {F[index][2]}",f"indo para: " + F[index][2][est]])
                         if afne_rec(E, Q, F, F[index][2][est], QF, C) == 0:  # recursão
                             return 0
 

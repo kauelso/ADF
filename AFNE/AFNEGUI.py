@@ -16,10 +16,6 @@ def format_transition(t):
 
 print("Expressao que sera convertida: ")
 
-exp = input()
-exp = intp.convert(exp)
-print(exp)
-ER_AFNE.convert(exp)
 
 with open('AFNE/AFNE_automata.json','r') as json_file:
     AFNEjson = json.load(json_file)

@@ -6,16 +6,16 @@ def to_tuple(f):
     return aux
 
 def format_transition(t):
-    convert = lambda x: "δ=("+str(x[0])+","+str(x[1])+")="+str(x[2])
+    convert = lambda x: str(x[3])
     aux = convert(t)
     return aux
 
-def executar(cadeia,window,contador,steps,state,label,slabel,Clabel):
+def executar(window,contador,steps,state,label,slabel,Clabel):
     if contador[0] < len(steps):
-        Clabel.config(text= f"Cadeia lida: {cadeia[0:contador[0]+1]}")
+        Clabel.config(text= f"Cadeia não lida: {steps[contador[0]][0]}")
         Clabel.update()
 
-        label.config(text= f"Caracter: {steps[contador[0]][1]}  Estado atual: {steps[contador[0]][0]}")
+        label.config(text= f"Caracter: {steps[contador[0]][0][0]}  {steps[contador[0]][1]}  {steps[contador[0]][2]}")
         label.update()
 
         slabel.config(text = str(format_transition(steps[contador[0]])))
@@ -47,7 +47,7 @@ def GUIstart(cadeia):
     stlabel.pack()
     Clabel = tk.Label(frame)
     Clabel.pack()
-    avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(cadeia,frame,contador,steps,state,slabel,stlabel,Clabel))
+    avancar = tk.Button(frame, text ="Avançar", command = lambda: executar(frame,contador,steps,state,slabel,stlabel,Clabel))
     avancar.pack()
 
     window.mainloop()

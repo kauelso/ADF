@@ -2,6 +2,8 @@ import tkinter as tk
 import json
 import AFNE
 import AFNEresultsGUI
+import ER_conver_AFNE as ER_AFNE
+import infix_to_prefix as intp
 
 def to_tuple(f):
     aux = [tuple(elem) for elem in f]
@@ -11,6 +13,13 @@ def format_transition(t):
     convert = lambda x: "δ=("+str(x[0])+","+str(x[1])+")="+str(x[2])
     aux = [convert(elem) for elem in t]
     return aux
+
+print("Expressao que sera convertida: ")
+
+exp = input()
+exp = intp.convert(exp)
+print(exp)
+ER_AFNE.convert(exp)
 
 with open('AFNE/AFNE_automata.json','r') as json_file:
     AFNEjson = json.load(json_file)

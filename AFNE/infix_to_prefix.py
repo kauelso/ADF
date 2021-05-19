@@ -1,7 +1,7 @@
 def normalizeExp(str1, opcodes):
     out = ""
     for elem in str1:
-        if elem in opcodes or elem == '(' or elem == ')':
+        if elem in ["+","."] or elem == '(' or elem == ')':
             out = out + elem
         elif out != "":
             aux = out[-1]
@@ -26,13 +26,17 @@ def resolveOp(stack,elem,opcodes,popped):
 
 def resolveLessOp(stack,elem,opcodes,output):
     if stack: #caso ainda haja stack
-        for op in stack: #para cada operador na stack
-            if op != '(' and op != ')' and opcodes.index(elem) < opcodes.index(op): #se o operador ainda tiver menos prioridade
+        stack_aux = stack.copy()
+        stack_aux.reverse()
+        for op in stack_aux: #para cada operador na stack
+            if op == "(" or op == ")":
+                stack.append(elem)
+                break
+            elif opcodes.index(elem) < opcodes.index(op): #se o operador ainda tiver menos prioridade
                 popped = stack.pop() #Faz o pop do operador atual
                 output.append(popped) #coloca ele no output
             else:
-                popped = stack.pop() #faz o pop do operador atual
-                resolveOp(stack,elem,opcodes,popped) #trata ele
+                stack.append(elem)
                 break
     if not stack:
         stack.append(elem)
@@ -50,7 +54,7 @@ def convert(ex):
             if stack: #caso tenha algo na pilha
                 popped = stack.pop() #da pop no elemento que esta na pilha
                 if popped in opcodes and opcodes.index(elem) < opcodes.index(popped): #se o elemento retirado for um operador e tiver maior prioridade 
-                    output.append(popped) #coloca o elemento retirado no output no output
+                    output.append(popped) #coloca o elemento retirado no output
                     resolveLessOp(stack,elem,opcodes,output) #trata o elemento que ira ser colocado
                 else:
                     resolveOp(stack,elem,opcodes,popped) #Se o operador tiver maior precedencia ou o top da pilha nao for um operador ele é tratado nessa func
@@ -76,6 +80,7 @@ def convert(ex):
     str1 = "".join(str(x) for x in output) #transforma o array em uma string
     return str1   
 
-# C = input()
-# convert(C)
+C = input()
+print(convert(C))
+
 

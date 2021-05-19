@@ -15,6 +15,10 @@ def format_transition(t):
     return aux
 
 print("Expressao que sera convertida: ")
+er = input()
+erc = intp.convert(er)
+print(erc)
+ER_AFNE.convert(erc)
 
 
 with open('AFNE/AFNE_automata.json','r') as json_file:

@@ -158,7 +158,3 @@ def convert(cad):
 
     with open('AFNE/AFNE_automata.json', 'w') as write_file:
         json.dump(jsondata, write_file)
-
-
-x = '+ae'
-convert(x)

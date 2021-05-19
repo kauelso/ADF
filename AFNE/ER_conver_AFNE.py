@@ -66,10 +66,27 @@ def fecha_automato(E1, Q1, F1, Q01, QF1, aut):
     return E, Q, F, Q0, QF, aut
 
 
+def convert_nulo():
+
+    jsondata = {
+        'E': '',
+        'Q': [],
+        'Q0': '',
+        'F': [],
+        'QF': []
+    }
+
+    with open('AFNE/AFNE_automata.json', 'w') as write_file:
+        json.dump(jsondata, write_file)
+
+
 def convert(cad):
     cadeia = []
     pilha = []
     aut = 0    # Contador para o numero de estados criados para automatos (/2)
+    if cad == '':
+        convert_nulo()
+        return
 
     for i in range(0, len(cad)):   # Coloca a cadeia em uma lista, para ser usada com pilha
         cadeia.append(cad[i])

@@ -1,12 +1,21 @@
-def normalizeExp(str1, opcodes):
+def normalizeExp(str1):
     out = ""
     for elem in str1:
-        if elem in ["+", "."] or elem == '(' or elem == ')':
+        if elem in ["+", "."]:
             out = out + elem
         elif out != "":
             aux = out[-1]
-            if aux in opcodes or aux == '(' or aux == ')':
+            if aux in ["+", "."] or aux == "(":
                 out = out + elem
+            elif elem == "*":
+                out = out + elem
+            elif elem == ")" and aux == ")":
+                out = out+elem
+            elif aux == ")" and elem == "(":
+                out = out + '.'
+                out = out + elem
+            elif elem == ")" and aux not in ["+", "."] and aux not in ["(", ")"]:
+                out = out+elem
             else:
                 out = out + '.'
                 out = out + elem
@@ -48,7 +57,7 @@ def convert(ex):
     # operadores em ordem (menos relevante para o mais relevante)
     opcodes = ['+', '.', '*']
 
-    exlist = normalizeExp(ex[::-1], opcodes)  # inverter a string de entrada
+    exlist = normalizeExp(ex)[::-1]  # inverter a string de entrada
 
     output = []  # output stack
     stack = []  # op stack

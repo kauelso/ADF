@@ -1,5 +1,6 @@
 import json
 
+
 def rem_rep(lista):
     l = []
     for i in lista:
@@ -13,6 +14,17 @@ def cria_automato(C, aut):
     E = C
     Q = ['q'+str(i), 'q'+str(i+1)]
     F = [('q'+str(i), C, ['q'+str(i+1)])]
+    Q0 = 'q'+str(i)
+    QF = ['q'+str(i+1)]
+    aut = aut + 1
+    return E, Q, F, Q0, QF, aut
+
+
+def cria_automato_vazio(aut):
+    i = aut * 2
+    E = ''
+    Q = ['q'+str(i), 'q'+str(i+1)]
+    F = [('q'+str(i), '', ['q'+str(i+1)])]
     Q0 = 'q'+str(i)
     QF = ['q'+str(i+1)]
     aut = aut + 1
@@ -118,12 +130,20 @@ def convert(cad):
                 pilha.append(E)
 
         else:
-            E, Q, F, Q0, QF, aut = cria_automato(op, aut)
-            pilha.append(QF)
-            pilha.append(Q0)
-            pilha.append(F)
-            pilha.append(Q)
-            pilha.append(E)
+            if op == 'e':
+                E, Q, F, Q0, QF, aut = cria_automato_vazio(aut)
+                pilha.append(QF)
+                pilha.append(Q0)
+                pilha.append(F)
+                pilha.append(Q)
+                pilha.append(E)
+            else:
+                E, Q, F, Q0, QF, aut = cria_automato(op, aut)
+                pilha.append(QF)
+                pilha.append(Q0)
+                pilha.append(F)
+                pilha.append(Q)
+                pilha.append(E)
 
     # A ordem é [QF, Q0, F, Q, E], para extrair mais facil é so dar pilha.pop para os json usando a ordem inversa :)
     pilha.reverse()
@@ -136,5 +156,9 @@ def convert(cad):
         'QF': pilha[4]
     }
 
-    with open('AFNE/AFNE_automata.json','w') as write_file:
-        json.dump(jsondata,write_file)
+    with open('AFNE/AFNE_automata.json', 'w') as write_file:
+        json.dump(jsondata, write_file)
+
+
+x = '+ae'
+convert(x)

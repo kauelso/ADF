@@ -100,6 +100,3 @@ def convert(ex):
     output.reverse()  # inverte o array de output
     str1 = "".join(str(x) for x in output)  # transforma o array em uma string
     return str1
-
-c = input()
-print(convert(c))

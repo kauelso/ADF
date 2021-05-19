@@ -3,6 +3,8 @@ def normalizeExp(str1):
     for elem in str1:
         if elem in ["+", "."]:
             out = out + elem
+        elif elem == " " or elem == '\n' or elem == '\t':
+            out = out
         elif out != "":
             aux = out[-1]
             if aux in ["+", "."] or aux == "(":
@@ -21,8 +23,8 @@ def normalizeExp(str1):
                 out = out + elem
         else:
             out = out+elem
+    print(out)
     return out
-
 
 def resolveOp(stack, elem, opcodes, popped):
     if popped == '(' or ')':  # se o operador for um parenteses
@@ -98,3 +100,6 @@ def convert(ex):
     output.reverse()  # inverte o array de output
     str1 = "".join(str(x) for x in output)  # transforma o array em uma string
     return str1
+
+c = input()
+print(convert(c))

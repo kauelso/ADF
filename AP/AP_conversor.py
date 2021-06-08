@@ -58,7 +58,7 @@ def convertPvParaEf(E,Q,EP,F,Q0,Z0):
         "QF": nq[1]
     }
 
-    with open("AP/PVparaEF.json",'w') as write_file:
+    with open("AP/converted/PVparaEF.json",'w') as write_file:
         json.dump(jsonData,write_file)
 
 convertPvParaEf(E,Q,EP,F,Q0,Z0)

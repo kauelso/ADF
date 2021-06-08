@@ -2,11 +2,11 @@ import sys
 
 E = "01"
 Q = ["q0", "q1", "q2"],
-EP = "01Z"
-F = [["q0", "0", "Z", ["q0", "0Z"]], ["q0", "1", "Z", ["q0", "1Z"]], ["q0", "0", "0", ["q0", "00"]], ["q0", "0", "1", ["q0", "01"]], ["q0", "1", "0", ["q0", "10"]], ["q0", "1", "1", [
-    "q0", "11"]], ["q0", "", "Z", ["q1", "Z"]], ["q0", "", "0", ["q1", "0"]], ["q0", "", "1", ["q1", "1"]], ["q1", "0", "0", ["q1", ""]], ["q1", "1", "1", ["q1", ""]], ["q1", "", "Z", ["q2", ""]]]
+EP = ["0","1","Z0"],
+F = [["q0", "0", "Z0", ["q0", ["0","Z0"]]], ["q0", "1", "Z0", ["q0", ["1","Z0"]]], ["q0", "0", "0", ["q0", "00"]], ["q0", "0", "1", ["q0", "01"]], ["q0", "1", "0", ["q0", "10"]], ["q0", "1", "1", [
+    "q0", "11"]], ["q0", "", "Z0", ["q1", ["Z0"]]], ["q0", "", "0", ["q1", "0"]], ["q0", "", "1", ["q1", "1"]], ["q1", "0", "0", ["q1", ""]], ["q1", "1", "1", ["q1", ""]], ["q1", "", "Z0", ["q2", ""]]]
 Q0 = "q0"
-Z0 = "Z"
+Z0 = "Z0"
 QF = ["q2"]   # pra aceitaçao por pilha vazia, qf é inutil
 C = '1001'
 
@@ -37,7 +37,7 @@ def tratar(pilha, elem):       # Coloca e retira os elementos na pilha
         return pilha2
 
 
-def appv_start(E, Q, EP, F, Q0, Z0, QF, C):
+def appv_start(E, Q, EP, F, Q0, Z0, C):
     pilha = [Z0]
     # para automato com aceitacao em pilha vazia, não é utilizado o qf
 
@@ -86,4 +86,4 @@ def appv_start(E, Q, EP, F, Q0, Z0, QF, C):
 
 
 # MAIN
-appv_start(E, Q, EP, F, Q0, Z0, QF, C)
+appv_start(E, Q, EP, F, Q0, Z0, C)

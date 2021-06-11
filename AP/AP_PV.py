@@ -9,7 +9,7 @@ import json
 # Q0 = "q0"
 # Z0 = "Z0"
 # QF = ["q2"]   # pra aceitaçao por pilha vazia, qf é inutil
-C = '1001'
+C = '10110'
 
 with open('AP/data/AP_PV.json','r') as json_file:
     APjson = json.load(json_file)
@@ -53,7 +53,11 @@ def appv_start(E, Q, EP, F, Q0, Z0, C):
     # para automato com aceitacao em pilha vazia, não é utilizado o qf
 
     def appv_rec(E, Q, EP, F, Q0, Z0, pilha, C):
-        print(pilha, Q0)
+        print("--------------------------")
+        print("Estado atual: "+ Q0)
+        print("Pilha:")
+        print(pilha)
+        print("Cadeia que será lida: " + C)
         if len(C) == 0:
             if len(pilha) == 0:
                 return 0

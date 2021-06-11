@@ -9,7 +9,7 @@ import json
 # Q0 = "q0"
 # Z0 = "Z0"
 # QF = ["q2"]
-C = '1001'
+C = '100001'
 
 with open('AP/data/AP_EF.json','r') as json_file:
     APjson = json.load(json_file)
@@ -52,7 +52,11 @@ def apef_start(E, Q, EP, F, Q0, Z0, QF, C):
     pilha = [Z0]
 
     def apef_rec(E, Q, EP, F, Q0, Z0, QF, pilha, C):
-        print(pilha, Q0)
+        print("--------------------------")
+        print("Estado atual: "+ Q0)
+        print("Pilha:")
+        print(pilha)
+        print("Cadeia que será lida: " + C)
         if len(C) == 0:
             if Q0 in QF:
                 return 0

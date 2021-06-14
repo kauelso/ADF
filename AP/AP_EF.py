@@ -9,7 +9,6 @@ import json
 # Q0 = "q0"
 # Z0 = "Z0"
 # QF = ["q2"]
-C = '100001'
 
 with open('AP/data/AP_EF.json','r') as json_file:
     APjson = json.load(json_file)
@@ -100,4 +99,15 @@ def apef_start(E, Q, EP, F, Q0, Z0, QF, C):
 
 
 # MAIN
+print("Q: "+str(Q))
+print("Σ: "+str(EP))
+print("Γ: "+E)
+print("Q0: "+Q0)
+print("Z0: "+Z0)
+print("QF: "+str(QF))
+print("Transicoes: ")
+for q in F:
+    print("δ("+q[0]+","+q[1]+","+q[2]+") = ("+q[3][0]+","+ str(q[3][1])+")")
+print("Cadeia: ")
+C = input()
 apef_start(E, Q, EP, F, Q0, Z0, QF, C)

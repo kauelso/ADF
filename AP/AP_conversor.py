@@ -21,7 +21,7 @@ def createState(q):
 def buildFinalTransitions(f,qf,x0,z0):
     for elem in f:
         if elem[1] == "" and elem[2] == z0 and elem[3][1] == "":
-            f.append([elem[3][0], "", x0, [qf, ""]])
+            f.append([elem[3][0], "", x0, [qf, [x0]]])
 
 def addNewStatesEF(q,q0,f,z0,x0):
     novoq0 = createState(q) #cria novo estado inicial
